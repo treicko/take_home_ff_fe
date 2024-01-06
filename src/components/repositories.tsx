@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import dayjs from 'dayjs';
 import axios from "axios";
 import relativeTime from 'dayjs/plugin/relativeTime'
@@ -10,6 +11,11 @@ declare module 'dayjs' {
   }
 }
 
+type RepositoryParams = {
+  owner: string;
+  accessData: string;
+}
+
 type Repository = {
   name: string;
   updated_at: string;
@@ -19,18 +25,15 @@ type Repository = {
   watchers?: number;
 };
 
-export default function Repositories() {
+export default function Repositories({ owner, accessData }: RepositoryParams) {
 
   const [repositories, setRepositories] = useState<Repository[]>([]);
 
   useEffect(() => {
-    const token = new URLSearchParams(window.location.search).get(
-      "access_token"
-    );
     axios
       .get("http://localhost:8080/repositories", {
         headers: {
-          Authorization: "token " + token,
+          Authorization: "token " + accessData,
         },
       })
       .then((res) => {
@@ -39,7 +42,7 @@ export default function Repositories() {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [accessData]);
 
   return (
     <ul className="ml-2 divide-y divide-gray-100">
@@ -50,7 +53,14 @@ export default function Repositories() {
               <p className="text-sm font-semibold leading-6 text-gray-900">
                 {repository.name}
                 <span className="ml-2 inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">
-                  {repository.visibility}
+                  <Link to={`/branches/${owner}/${repository.name}`}>
+                    Branches
+                  </Link>
+                </span>
+                <span className="ml-2 inline-flex items-center rounded-md bg-indigo-50 px-2 py-1 text-xs font-medium text-indigo-700 ring-1 ring-inset ring-indigo-700/10">
+                  <Link to={`/commits/${owner}/${repository.name}`}>
+                    Commits
+                  </Link>
                 </span>
               </p>
               <p className="mt-1 truncate text-xs leading-5 text-gray-500">{repository.description}</p>
