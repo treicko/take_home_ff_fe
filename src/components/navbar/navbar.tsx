@@ -7,13 +7,11 @@ import { Link } from "react-router-dom";
 type User = {
   avatar_url?: string;
   html_url?: string;
+  login?: string;
 };
 
 const navigation = [
-  { name: 'Repositories', href: '/repositories', current: true },
-  { name: 'Team', href: '#', current: false },
-  { name: 'Projects', href: '#', current: false },
-  { name: 'Calendar', href: '#', current: false },
+  { name: 'Repositories', href: '/repositories', current: true }
 ]
 
 function classNames(...classes : any) {
@@ -60,7 +58,7 @@ function Navbar({ githubUser } : {githubUser: User}) {
                         )}
                         aria-current={item.current ? 'page' : undefined}
                       >
-                        <Link to={item.href}>{item.name}</Link>
+                        <Link to={`${item.href}/${githubUser.login}`}>{item.name}</Link>
                       </a>
                     ))}
                   </div>
@@ -106,16 +104,6 @@ function Navbar({ githubUser } : {githubUser: User}) {
                             className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                           >
                             Your Profile
-                          </a>
-                        )}
-                      </Menu.Item>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <a
-                            href="#"
-                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                          >
-                            Sign out
                           </a>
                         )}
                       </Menu.Item>
