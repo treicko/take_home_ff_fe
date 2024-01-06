@@ -1,6 +1,12 @@
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Configure environment variables
+
+In the project directory add .env file and add the following environment variables:
+
+```shell
+REACT_APP_GITHUB_CLIENT_ID="<Your-github-client-ID>"
+```
 
 ## Available Scripts
 

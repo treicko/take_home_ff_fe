@@ -5,6 +5,7 @@ import SignIn from './components/singin/singin';
 import Navbar from './components/navbar/navbar';
 import Repositories from "./components/repositories";
 import Branches from "./components/branch-list";
+import Commits from "./components/commit-list";
 
 import {
   BrowserRouter,
@@ -72,6 +73,7 @@ function App() {
                     <Route path="/" element={<Repositories owner={user.login || ""} accessData={accessData}/>} />
                     <Route path="/repositories/:owner" element={<Repositories owner={user.login || ""} accessData={accessData} />} />
                     <Route path="/branches/:owner/:repo" element={<Branches accessData={accessData}/>} />
+                    <Route path="/commits/:owner/:repo" element={<Commits accessData={accessData}/>} />
                   </Routes>
                 </div>
               </main>
