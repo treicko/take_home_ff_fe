@@ -2,6 +2,7 @@
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { Link } from "react-router-dom";
 
 type User = {
   avatar_url?: string;
@@ -9,7 +10,7 @@ type User = {
 };
 
 const navigation = [
-  { name: 'Repositories', href: '#', current: true },
+  { name: 'Repositories', href: '/repositories', current: true },
   { name: 'Team', href: '#', current: false },
   { name: 'Projects', href: '#', current: false },
   { name: 'Calendar', href: '#', current: false },
@@ -59,7 +60,7 @@ function Navbar({ githubUser } : {githubUser: User}) {
                         )}
                         aria-current={item.current ? 'page' : undefined}
                       >
-                        {item.name}
+                        <Link to={item.href}>{item.name}</Link>
                       </a>
                     ))}
                   </div>
