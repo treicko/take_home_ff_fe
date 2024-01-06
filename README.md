@@ -1,5 +1,13 @@
 # Getting Started with Create React App
 
+## Install dependencies
+
+Run the following command to install all dependencies
+
+```shell
+npm install
+```
+
 ## Configure environment variables
 
 In the project directory add .env file and add the following environment variables:
